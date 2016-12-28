@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<subDataset name="dataset1">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="car_nr_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[car_nr_id]]></fieldDescription>
+		</field>
+		<field name="car_per_taxa" class="java.lang.Double">
+			<fieldDescription><![CDATA[car_per_taxa]]></fieldDescription>
+		</field>
+		<field name="car_tx_status" class="java.lang.String">
+			<fieldDescription><![CDATA[car_tx_status]]></fieldDescription>
+		</field>
+		<field name="car_tx_nome" class="java.lang.String">
+			<fieldDescription><![CDATA[car_tx_nome]]></fieldDescription>
+		</field>
+		<field name="loj_nr_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[loj_nr_id]]></fieldDescription>
+		</field>
+        
+	</subDataset>
+	<parameter name="listCar_cartao" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="54" width="228" height="28"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Relatorio Car_cartao]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<rectangle>
+				<reportElement x="0" y="30" width="555" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[car_nr_id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[car_per_taxa]]></text>
+			</staticText>
+			<line>
+				<reportElement x="100" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[car_tx_status]]></text>
+			</staticText>
+			<line>
+				<reportElement x="200" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="300" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[car_tx_nome]]></text>
+			</staticText>
+			<line>
+				<reportElement x="300" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="400" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[loj_nr_id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="400" y="30" width="1" height="20"/>
+			</line>
+
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="21"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1">
+						<dataSourceExpression><![CDATA[$P{listCar_cartao}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="21">
+						<rectangle>
+							<reportElement mode="Transparent" x="0" y="0" width="555" height="20"/>
+						</rectangle>
+						<textField>
+							<reportElement x="0" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{car_nr_id}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="100" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$F{car_per_taxa}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="100" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="200" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.String"><![CDATA[$F{car_tx_status}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="200" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="300" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.String"><![CDATA[$F{car_tx_nome}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="300" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="400" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{loj_nr_id}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="400" y="0" width="1" height="20"/>
+						</line>
+						
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

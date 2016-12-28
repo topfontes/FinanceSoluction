@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<subDataset name="dataset1">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="conf_plc_nr_id_juros_recebido" class="java.lang.Integer">
+			<fieldDescription><![CDATA[conf_plc_nr_id_juros_recebido]]></fieldDescription>
+		</field>
+		<field name="conf_plc_nr_id_desconto_consedido" class="java.lang.Integer">
+			<fieldDescription><![CDATA[conf_plc_nr_id_desconto_consedido]]></fieldDescription>
+		</field>
+		<field name="conf_plc_nr_id_desconto_recebido" class="java.lang.Integer">
+			<fieldDescription><![CDATA[conf_plc_nr_id_desconto_recebido]]></fieldDescription>
+		</field>
+		<field name="loj_nr_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[loj_nr_id]]></fieldDescription>
+		</field>
+		<field name="conf_plc_nr_id_taxa_cartao" class="java.lang.Integer">
+			<fieldDescription><![CDATA[conf_plc_nr_id_taxa_cartao]]></fieldDescription>
+		</field>
+        
+	</subDataset>
+	<parameter name="listConf_configuracao" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="54" width="228" height="28"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Relatorio Conf_configuracao]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<rectangle>
+				<reportElement x="0" y="30" width="555" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[conf_plc_nr_id_juros_recebido]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[conf_plc_nr_id_desconto_consedido]]></text>
+			</staticText>
+			<line>
+				<reportElement x="100" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[conf_plc_nr_id_desconto_recebido]]></text>
+			</staticText>
+			<line>
+				<reportElement x="200" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="300" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[loj_nr_id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="300" y="30" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="400" y="30" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[conf_plc_nr_id_taxa_cartao]]></text>
+			</staticText>
+			<line>
+				<reportElement x="400" y="30" width="1" height="20"/>
+			</line>
+
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="21"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1">
+						<dataSourceExpression><![CDATA[$P{listConf_configuracao}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="21">
+						<rectangle>
+							<reportElement mode="Transparent" x="0" y="0" width="555" height="20"/>
+						</rectangle>
+						<textField>
+							<reportElement x="0" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{conf_plc_nr_id_juros_recebido}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="100" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{conf_plc_nr_id_desconto_consedido}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="100" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="200" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{conf_plc_nr_id_desconto_recebido}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="200" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="300" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{loj_nr_id}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="300" y="0" width="1" height="20"/>
+						</line>
+						<textField>
+							<reportElement x="400" y="1" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$F{conf_plc_nr_id_taxa_cartao}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="400" y="0" width="1" height="20"/>
+						</line>
+						
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4af1412e-66e1-40d8-8a33-66ef50d100e2">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="urlPathlogo" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="saldo_anterior" class="java.lang.Double"/>
+	<parameter name="saldo_atual" class="java.lang.Double"/>
+	<parameter name="periodo" class="java.lang.String"/>
+	<parameter name="conta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="conta" class="java.lang.String">
+		<fieldDescription><![CDATA[conta]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[obs]]></fieldDescription>
+	</field>
+	<field name="vl_entrada" class="java.lang.Double">
+		<fieldDescription><![CDATA[vl_entrada]]></fieldDescription>
+	</field>
+	<field name="vl_saida" class="java.lang.Double">
+		<fieldDescription><![CDATA[vl_saida]]></fieldDescription>
+	</field>
+	<field name="data" class="java.util.Date">
+		<fieldDescription><![CDATA[data]]></fieldDescription>
+	</field>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA["1"]]></variableExpression>
+	</variable>
+	<variable name="entrada" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vl_entrada}]]></variableExpression>
+	</variable>
+	<variable name="saida" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vl_saida}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<image>
+				<reportElement x="11" y="13" width="59" height="58" uuid="b7da79a7-e166-4504-b022-a62ddd90eb7f"/>
+				<imageExpression><![CDATA[$P{urlPathlogo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="77" y="46" width="330" height="12" uuid="6998b579-a8f5-47b6-a399-7284a7506f79"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="76" width="555" height="1" uuid="f7390055-0dee-4fcb-9f93-2380465481f7"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="452" y="61" width="100" height="10" uuid="b0429194-2da4-4e1f-90ec-f683b3b556da"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="77" y="15" width="419" height="14" uuid="fe68c5be-2b9a-4ec3-af74-7b17eb3ec59c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[EMPRESA DEMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="30" width="302" height="12" uuid="454161cd-95a7-4432-8c46-591e385bcc6a"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[CNPJ: 04.683.415/0001-83  INSC.ESTADUAL: 04269-3]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement x="77" y="59" width="330" height="12" uuid="75e50fe5-a81d-4596-9a81-b2ddc031b5c3"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="49" y="20" width="153" height="11" uuid="fefb20fd-19d5-4766-9cac-69f4869de0dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Despesa/Receita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="20" width="160" height="11" uuid="95346417-7cce-4595-9810-334024833fbd"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Histórico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="20" width="77" height="11" uuid="501bb7a9-b391-43a6-b232-ae6e6b361d82"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Vl. Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="20" width="70" height="11" uuid="1ff83cec-30af-4b35-98a1-11cd4a050217"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Vl. Saída]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="20" width="50" height="11" uuid="3eba34c0-e4ae-4c2d-af91-258af44d0363"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="31" width="555" height="1" uuid="9947b02c-ef70-4b2d-b410-f2a899564326"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="452" y="40" width="100" height="11" uuid="9d0c5bfd-2105-47fd-9ac3-b9113890aa8f"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldo_anterior}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="378" y="40" width="100" height="11" uuid="f583ac6f-9cc9-4f81-814b-f3be080b641b"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Anterior >>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="3" width="30" height="11" uuid="aa5fc986-93d4-4877-a34b-403f52436f5e"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="34" y="3" width="264" height="11" uuid="95eff1a0-5fd7-4ced-99da-4b54b6559be4"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{conta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="16" width="555" height="1" uuid="551f3493-4534-4948-8835-65a1f8f563ce"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="10" forecolor="#F7F5ED" backcolor="#F2EEEE" uuid="dcfffd20-12c7-447d-9ff9-d07009a79794">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(($V{contador}.intValue())%2).equals(new Integer("0")))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="50" y="0" width="152" height="10" uuid="2556e5f1-bbc6-4ed9-ba42-03fe9f82002e"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{conta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="0" width="192" height="10" uuid="989e6c55-d761-4f52-835d-c5f107b0ed6d"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="407" y="0" width="71" height="10" uuid="4a9f889b-bf90-4b7a-84ee-9dc6b00e06e3"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vl_entrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="482" y="0" width="70" height="10" uuid="1f53cffe-4b91-4ba6-8840-460971999a95"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vl_saida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="0" width="53" height="10" uuid="d0180842-5235-4932-a7ae-ba09db3aaaa8"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="4" width="555" height="1" uuid="22ba6ca5-c8c3-488b-8a91-229cf56f1859"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="8" width="100" height="11" uuid="af17383b-20b8-4775-b85a-6110f76c6ddc"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="41" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="91320aa1-c448-4ba0-9a56-8c997b205c96"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="378" y="7" width="100" height="10" uuid="bff5da0a-2fb0-43ca-af80-977437aa8a94"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{entrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="452" y="7" width="100" height="10" uuid="e85ff34c-3d74-457d-b6f2-bbea5356d339"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{saida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="452" y="22" width="100" height="11" uuid="d07ba39d-d614-4f20-9575-7e96ba52da88"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldo_atual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="378" y="22" width="100" height="11" uuid="b96bd6a3-2b25-4514-abc9-c5b2dd915e4f"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Período >>]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

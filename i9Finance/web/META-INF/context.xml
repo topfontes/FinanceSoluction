@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/i9finance" unloadDelay="3000">
+<!--  <Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" maxActive="2" maxIdle="0" maxWait="5000" minEvictableIdleTimeMillis="10000" name="jdbc/easyportalds1" password="postgres" removeAbandoned="true" removeAbandonedTimeout="10" type="javax.sql.DataSource" url="jdbc:postgresql://127.0.0.1:5432/i9fin" username="postgres"/>
+  <Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" maxActive="2" maxIdle="0" maxWait="5000" minEvictableIdleTimeMillis="10000" name="jdbc/i9financeds1" password="postgres" removeAbandoned="true" removeAbandonedTimeout="10" type="javax.sql.DataSource" url="jdbc:postgresql://127.0.0.1:5432/i9fin" username="postgres"/>-->
+
+<!--  <Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" maxActive="2" maxIdle="0" maxWait="5000" minEvictableIdleTimeMillis="10000" name="jdbc/easyportalds1" password="i9tiesosucesso" removeAbandoned="true" removeAbandonedTimeout="10" type="javax.sql.DataSource" url="jdbc:postgresql://www.i9taxi.com.br:5432/i9fin" username="postgres"/>
+  <Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" maxActive="2" maxIdle="0" maxWait="5000" minEvictableIdleTimeMillis="10000" name="jdbc/i9financeds1" password="i9tiesosucesso" removeAbandoned="true" removeAbandonedTimeout="10" type="javax.sql.DataSource" url="jdbc:postgresql://www.i9taxi.com.br:5432/i9fin" username="postgres"/>-->
+
+</Context>

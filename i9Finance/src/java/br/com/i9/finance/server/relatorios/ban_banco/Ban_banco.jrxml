@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c294c27d-a236-48dd-b13b-844136db2ed0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="9c6b6e75-ce05-4816-b6bb-27b1211e36d7">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="ban_tx_status" class="java.lang.String">
+			<fieldDescription><![CDATA[ban_tx_status]]></fieldDescription>
+		</field>
+		<field name="ban_tx_nome" class="java.lang.String">
+			<fieldDescription><![CDATA[ban_tx_nome]]></fieldDescription>
+		</field>
+		<field name="ban_nr_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[ban_nr_id]]></fieldDescription>
+		</field>
+		<field name="loj_nr_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[loj_nr_id]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="listBan_banco" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="54" width="228" height="28" uuid="c55dadcc-b8ee-4d76-a025-47415325bf7b"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Relatorio Ban_banco]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<rectangle>
+				<reportElement x="0" y="30" width="555" height="20" uuid="c816cbba-2da7-494a-8e33-7adacb5139f2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="20" uuid="0912360d-b368-425e-b9e2-8cf8875cecda"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ban_tx_status]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="1" height="20" uuid="36bc8b82-b074-43f6-8c53-263621b684d4"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="30" width="100" height="20" uuid="7c225940-feed-4f73-9c7b-caa547f7c440"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ban_tx_nome]]></text>
+			</staticText>
+			<line>
+				<reportElement x="100" y="30" width="1" height="20" uuid="88275f2e-a54c-4c77-aa87-6ec3d8ff4f74"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="30" width="100" height="20" uuid="e72204ab-9e98-41c9-8f17-8ce034f41891"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ban_nr_id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="200" y="30" width="1" height="20" uuid="88c2c416-1476-451d-a6b9-5eb02899ea73"/>
+			</line>
+			<staticText>
+				<reportElement x="300" y="30" width="100" height="20" uuid="a5e25bad-6554-4811-8bf5-fa9a7c22cdb5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[loj_nr_id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="300" y="30" width="1" height="20" uuid="be888df0-9a12-46ba-9060-60bbad4a9b2b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="21" uuid="8ee89239-8919-4b30-b071-c62799707699"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="f6dc7a9b-c312-4cf0-ae8c-6d92b11d75f2">
+						<dataSourceExpression><![CDATA[$P{listBan_banco}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="21">
+						<rectangle>
+							<reportElement mode="Transparent" x="0" y="0" width="555" height="20" uuid="1f62b682-fb45-4177-ad24-d350b52e16de"/>
+						</rectangle>
+						<textField>
+							<reportElement x="0" y="1" width="100" height="20" uuid="3c2dcbce-046b-4439-93b5-35fb2787d147"/>
+							<textFieldExpression><![CDATA[$F{ban_tx_status}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="0" width="1" height="20" uuid="acc610fd-e222-48f8-957c-816161eee0c2"/>
+						</line>
+						<textField>
+							<reportElement x="100" y="1" width="100" height="20" uuid="7e8f731c-ba7e-49d5-b144-fda43df3e171"/>
+							<textFieldExpression><![CDATA[$F{ban_tx_nome}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="100" y="0" width="1" height="20" uuid="03dacbf8-2e11-4d1c-a4ff-5ca94b31c69f"/>
+						</line>
+						<textField>
+							<reportElement x="200" y="1" width="100" height="20" uuid="21984dfa-5fba-461f-ab40-1a836201236d"/>
+							<textFieldExpression><![CDATA[$F{ban_nr_id}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="200" y="0" width="1" height="20" uuid="b90cb689-5bdd-42e5-bcaa-252b7288d704"/>
+						</line>
+						<textField>
+							<reportElement x="300" y="1" width="100" height="20" uuid="85b9abb2-da54-490c-b3dd-181f050606a5"/>
+							<textFieldExpression><![CDATA[$F{loj_nr_id}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="300" y="0" width="1" height="20" uuid="1b83447f-f0bd-4f08-a9ae-dc3acaa7e577"/>
+						</line>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
