@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-
 /**
  *
  * @author marcos
@@ -44,6 +43,7 @@ public class Razao_analiticoReport extends RelatorioBase {
             } else if (getStatus().equalsIgnoreCase("E")) {
                 list = systemBase.getV_lancamentosDAO().getByLan_plc_nr_id_deb(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT));
             }
+            systemBase.close();
 
             jRDataSource = new JRBeanCollectionDataSource(getListRazao(list));
 
@@ -64,8 +64,9 @@ public class Razao_analiticoReport extends RelatorioBase {
     public List<RazaoAnaliticoTemp> getListRazao(List<V_lancamentosT> lst) throws Exception {
 
         saldoDeb = systemBase.getLan_lancamentoDAO().getBySaldoAnteriorDeb(systemBase.convertDateForSql(getDateFormat(getDtInicio())), getPlc_nr_id());
+        systemBase.close();
         saldoCred = systemBase.getLan_lancamentoDAO().getBySaldoAnteriorCred(systemBase.convertDateForSql(getDateFormat(getDtInicio())), getPlc_nr_id());
-
+        systemBase.close();
         saldo_atual = saldoDeb - saldoCred;
 
         List<RazaoAnaliticoTemp> listTemp = new ArrayList<RazaoAnaliticoTemp>();
@@ -95,7 +96,7 @@ public class Razao_analiticoReport extends RelatorioBase {
     public void defineParametros() {
         try {
             getParameters().put("saldo_anterior", saldoDeb - saldoCred);
-            getParameters().put("periodo", "Período de " + getDtInicio() + " a " + getDtInicio());
+            getParameters().put("periodo", "Período de " + getDtInicio() + " a " + getDtFim());
             getParameters().put("conta", conta);
             getParameters().put("saldo_atual", saldo_atual);
             //TODO: Parametros para o relatorio

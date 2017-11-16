@@ -17,9 +17,9 @@ public class SystemBusinessBase extends EasyPortalBusinessBase {
     public static final String SISTEMA_i9finance = "I9FINANCE";
     public static String filei9financeCluster = "/i9financecluster.xml";
     private int typeDatabase = DAOFactory.POSTGRESQL;
-    private String url = "jdbc:postgresql://127.0.0.1:5432/i9fin";
-    private String user = "postgres";
-    private String pass = "postgres";
+//    private String url = "jdbc:postgresql://127.0.0.1:5432/i9fin";
+//    private String user = "postgres";
+//    private String pass = "postgres";
 
     private DAOFactoryCluster dao;
     private static I9Cluster i9Cluster = null;

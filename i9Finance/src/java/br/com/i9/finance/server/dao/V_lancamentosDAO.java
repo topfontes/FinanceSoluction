@@ -6,6 +6,7 @@ import br.com.easynet.database.DataSet;
 import br.com.jdragon.dao.*;
 import br.com.jdragon.dao.cluster.*;
 import br.com.i9.finance.client.i9finance.easyfin.transfer.*;
+import br.com.i9.finance.client.util.Funcoes;
 
 public class V_lancamentosDAO extends ObjectDAOCluster {
 
@@ -108,7 +109,7 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
             v_lancamentosT.setPlc_tx_debito(rs.getString("plc_tx_debito"));
             v_lancamentosT.setplc_tx_debito_super(rs.getString("plc_tx_debito_super"));
             v_lancamentosT.setPlc_tx_credito_super(rs.getString("plc_tx_credito_super"));
-            
+
             v_lancamentosT.setTipo_cred(rs.getString("tipo_cred"));
             v_lancamentosT.setTipo_deb(rs.getString("tipo_deb"));
             objs.add(v_lancamentosT);
@@ -116,7 +117,7 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
         return objs;
     }
 
-private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws Exception {
+    private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws Exception {
         List<V_lancamentosT> objs = new Vector();
         while (rs.next()) {
             V_lancamentosT v_lancamentosT = new V_lancamentosT();
@@ -126,20 +127,20 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
             v_lancamentosT.setPlc_tx_credito(rs.getString("plc_tx_credito"));
             v_lancamentosT.setPlc_tx_debito(rs.getString("plc_tx_debito"));
             v_lancamentosT.setplc_tx_debito_super(rs.getString("plc_tx_debito_super"));
-            v_lancamentosT.setPlc_tx_credito_super(rs.getString("plc_tx_credito_super"));            
+            v_lancamentosT.setPlc_tx_credito_super(rs.getString("plc_tx_credito_super"));
             v_lancamentosT.setTipo_cred(rs.getString("tipo_cred"));
             v_lancamentosT.setTipo_deb(rs.getString("tipo_deb"));
             objs.add(v_lancamentosT);
         }
         return objs;
-    }    
-    
+    }
+
     public List<V_lancamentosT> getAll(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_nr_id, int loj_nr_id) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
-
-            StringBuffer sql = new StringBuffer().append("select * from easyfin.v_lancamentos where loj_nr_id =? and lan_dt_lancamento between ? and ? ");
+            
+            StringBuffer sql = new StringBuffer().append("select * from easyfin.v_lancamentos where loj_nr_id =? and lan_dt_lancamento >= ? and lan_dt_lancamento <=? ");
             if (plc_nr_id > 0) {
                 sql.append(" and  (lan_plc_nr_id_deb =? or lan_plc_nr_id_cred =?)");
             }
@@ -162,10 +163,13 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
         } finally {
             try {
                 rs.close();
+            } catch (Exception e) {
+            }
+            try {
+
                 pStmt.close();
             } catch (Exception e) {
             }
-
         }
     }
 
@@ -330,7 +334,7 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento between ? and ? and lan_plc_nr_id_deb = ? and loj_nr_id order by lan_dt_lancamento desc";
+            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_deb = ? and loj_nr_id = ? order by lan_dt_lancamento desc";
             pStmt = createPrepareStatment(sql);
             pStmt.setObject(1, dt_inicio);
             pStmt.setObject(2, dt_final);
@@ -343,6 +347,9 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
         } finally {
             try {
                 rs.close();
+            } catch (Exception e) {
+            }
+            try {
                 pStmt.close();
             } catch (Exception e) {
             }
@@ -353,7 +360,7 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento between ? and ? and lan_plc_nr_id_cred = ? and loj_nr_id order by lan_dt_lancamento desc";
+            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_cred = ? and loj_nr_id =? order by lan_dt_lancamento desc";
 
             pStmt = createPrepareStatment(sql);
             pStmt.setObject(1, dt_inicio);
@@ -367,6 +374,10 @@ private List<V_lancamentosT> resultSetToObjectTransferGroup(ResultSet rs) throws
         } finally {
             try {
                 rs.close();
+            } catch (Exception e) {
+            }
+            try {
+
                 pStmt.close();
             } catch (Exception e) {
             }
