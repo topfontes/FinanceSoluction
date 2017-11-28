@@ -85,7 +85,7 @@ public class Lan_lancamentoInsertGWT extends CRUDBaseGWT {
         lflan_valor.setId("lflan_valor");
         getCpMaster().add(lflan_valor);
         lan_valor.setId("lan_valor");
-        lan_valor.setMaxLength(8);
+        lan_valor.setMaxLength(11);
         getCpMaster().add(lan_valor);
 
         LabelField lflan_plc_nr_id_cred = new LabelField("Crédito:");

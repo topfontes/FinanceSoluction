@@ -92,6 +92,7 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
     }
 
     private List<V_lancamentosT> resultSetToObjectTransfer(ResultSet rs) throws Exception {
+        //..
         List<V_lancamentosT> objs = new Vector();
         while (rs.next()) {
             V_lancamentosT v_lancamentosT = new V_lancamentosT();
