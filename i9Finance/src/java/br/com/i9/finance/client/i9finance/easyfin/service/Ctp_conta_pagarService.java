@@ -19,4 +19,6 @@ public interface Ctp_conta_pagarService extends RemoteService {
     public void update(Ctp_conta_pagarT ctp_conta_pagarT) throws Exception;
 
     public void updateBaixa(Ctp_conta_pagarT ctp_conta_pagarT, int conta_credora) throws Exception;
+    
+            
 }

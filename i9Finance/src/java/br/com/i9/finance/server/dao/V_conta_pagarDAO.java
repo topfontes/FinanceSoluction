@@ -108,10 +108,11 @@ public class V_conta_pagarDAO extends ObjectDAOCluster {
         List<V_conta_pagarT> objs = new Vector();
         while (rs.next()) {
             V_conta_pagarT v_conta_pagarT = new V_conta_pagarT();
+            v_conta_pagarT.setCtp_nr_id(rs.getInt("ctp_nr_id"));
             v_conta_pagarT.setDt_pagamento(rs.getDate("dt_pagamento"));
             v_conta_pagarT.setValor(rs.getDouble("valor"));
             v_conta_pagarT.setVl_pago(rs.getDouble("vl_pago"));
-            v_conta_pagarT.setSaldo(v_conta_pagarT.getValor() - v_conta_pagarT.getVl_pago());
+            //v_conta_pagarT.setSaldo(rs.getDouble("saldo"));
             v_conta_pagarT.setId_cli_fab(rs.getInt("id_cli_fab"));
             v_conta_pagarT.setNome(rs.getString("nome"));
             v_conta_pagarT.setFop_nr_id(rs.getInt("fop_nr_id"));
@@ -127,7 +128,6 @@ public class V_conta_pagarDAO extends ObjectDAOCluster {
             v_conta_pagarT.setCar_nr_id(rs.getInt("car_nr_id"));
             v_conta_pagarT.setCartao(rs.getString("cartao"));
             v_conta_pagarT.setLoj_nr_id(rs.getInt("loj_nr_id"));
-            v_conta_pagarT.setCtp_nr_id(rs.getInt("ctp_nr_id"));
             objs.add(v_conta_pagarT);
         }
         return objs;

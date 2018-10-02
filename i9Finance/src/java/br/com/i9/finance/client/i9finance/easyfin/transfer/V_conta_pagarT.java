@@ -36,7 +36,7 @@ public class V_conta_pagarT extends BaseModel {
     public static final String SALDO = "saldo";
 
     public V_conta_pagarT() {
-    }
+    } 
 
     public Date getDt_pagamento() {
         return (Date) get(DT_PAGAMENTO);
@@ -49,9 +49,16 @@ public class V_conta_pagarT extends BaseModel {
     public double getValor() {
         return get(VALOR) == null ? 0 : ((Double) get(VALOR)).doubleValue();
     }
+    
+    public void refreshSaldo(){
+        double saldo = getValor() - getVl_pago();
+        //set(SALDO,(getValor() - getVl_pago()))
+        setSaldo(saldo);
+    }
 
     public void setValor(double valor) {
         set(VALOR, valor);
+        refreshSaldo();
     }
 
     public int getId_cli_fab() {
@@ -108,6 +115,7 @@ public class V_conta_pagarT extends BaseModel {
 
     public void setPago(String pago) {
         set(PAGO, pago);
+        refreshSaldo();
     }
 
     public String getParcela() {

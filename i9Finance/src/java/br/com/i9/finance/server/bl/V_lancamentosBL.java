@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import br.com.easynet.easyportal.transfer.Usu_usuarioT;
 
-/**
+/** 
  * Classe Criada Automaticamente pelo "EasyNet Generate JDragon"
  */
 public class V_lancamentosBL extends SystemBusinessBase {
@@ -46,7 +46,7 @@ public class V_lancamentosBL extends SystemBusinessBase {
             }
             V_lancamentosDAO v_lancamentosDAO = getV_lancamentosDAO();
                                 
-            return v_lancamentosDAO.getAll(convertDateForSql(dt_inicio), convertDateForSql(dt_final), plc_nr_id, getIdLojaUsuarioLogado(usu_usuarioT));
+            return v_lancamentosDAO.getAll(convertDateForSql(dt_inicio), convertDateForSql(dt_final), plc_nr_id, getIdLojaUsuarioLogado(usu_usuarioT),"DESC");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -100,7 +100,7 @@ public class V_lancamentosBL extends SystemBusinessBase {
                 throw new BusinessException("Tentativa de execucao indevida da operacao".concat("consult"));
             }
             V_lancamentosDAO v_lancamentosDAO = getV_lancamentosDAO();
-            return v_lancamentosDAO.getAll(convertDateForSql(dt_inicio), convertDateForSql(dt_final), plc_nr_id, getIdLojaUsuarioLogado(usu_usuarioT));
+            return v_lancamentosDAO.getAll(convertDateForSql(dt_inicio), convertDateForSql(dt_final), plc_nr_id, getIdLojaUsuarioLogado(usu_usuarioT),"DESC");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

@@ -41,4 +41,6 @@ public class For_fornecedorServiceImpl extends RemoteServiceServlet implements F
         For_fornecedorBL for_fornecedorBL = new For_fornecedorBL();
         for_fornecedorBL.update(for_fornecedorT);
     }
+
+ 
 }

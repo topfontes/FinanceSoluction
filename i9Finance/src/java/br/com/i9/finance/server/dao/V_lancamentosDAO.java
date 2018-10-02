@@ -136,7 +136,7 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
         return objs;
     }
 
-    public List<V_lancamentosT> getAll(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_nr_id, int loj_nr_id) throws Exception {
+    public List<V_lancamentosT> getAll(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_nr_id, int loj_nr_id, String ordenar) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
@@ -145,7 +145,7 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
             if (plc_nr_id > 0) {
                 sql.append(" and  (lan_plc_nr_id_deb =? or lan_plc_nr_id_cred =?)");
             }
-            sql.append(" order by lan_dt_lancamento desc");
+            sql.append(" order by lan_dt_lancamento ").append(ordenar);
 
             pStmt = createPrepareStatment(sql.toString());
             pStmt.setObject(1, loj_nr_id);
@@ -173,7 +173,43 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
             }
         }
     }
+public List<V_lancamentosT> getAll_ASC(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_nr_id, int loj_nr_id) throws Exception {
+        PreparedStatement pStmt = null;
+        ResultSet rs = null;
+        try {
+            
+            StringBuffer sql = new StringBuffer().append("select * from easyfin.v_lancamentos where loj_nr_id =? and lan_dt_lancamento >= ? and lan_dt_lancamento <=? ");
+            if (plc_nr_id > 0) {
+                sql.append(" and  (lan_plc_nr_id_deb =? or lan_plc_nr_id_cred =?)");
+            }
+            sql.append(" order by lan_dt_lancamento asc");
 
+            pStmt = createPrepareStatment(sql.toString());
+            pStmt.setObject(1, loj_nr_id);
+            pStmt.setObject(2, dt_inicio);
+            pStmt.setObject(3, dt_final);
+            if (plc_nr_id > 0) {
+                pStmt.setObject(4, plc_nr_id);
+                pStmt.setObject(5, plc_nr_id);
+            }
+
+            rs = pStmt.executeQuery();
+            List<V_lancamentosT> list = resultSetToObjectTransfer(rs);
+            return list;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+
+                pStmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
     public List<V_lancamentosT> getAllSuperAgrupado(java.sql.Date dt_inicio, java.sql.Date dt_final, int loj_nr_id) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
@@ -330,12 +366,11 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
 
         }
     }
-
-    public List<V_lancamentosT> getByLan_plc_nr_id_deb(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_debito, int loj_nr_id) throws Exception {
+    public List<V_lancamentosT> getByLan_plc_nr_id_deb(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_debito, int loj_nr_id, String orderby) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_deb = ? and loj_nr_id = ? order by lan_dt_lancamento desc";
+            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_deb = ? and loj_nr_id = ? order by lan_dt_lancamento "+orderby;
             pStmt = createPrepareStatment(sql);
             pStmt.setObject(1, dt_inicio);
             pStmt.setObject(2, dt_final);
@@ -357,11 +392,11 @@ public class V_lancamentosDAO extends ObjectDAOCluster {
         }
     }
 
-    public List<V_lancamentosT> getByLan_plc_nr_id_cred(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_credito, int loj_nr_id) throws Exception {
+    public List<V_lancamentosT> getByLan_plc_nr_id_cred(java.sql.Date dt_inicio, java.sql.Date dt_final, int plc_credito, int loj_nr_id, String orderby) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_cred = ? and loj_nr_id =? order by lan_dt_lancamento desc";
+            String sql = "select * from easyfin.v_lancamentos where  lan_dt_lancamento >= ? and lan_dt_lancamento <= ? and lan_plc_nr_id_cred = ? and loj_nr_id =? order by lan_dt_lancamento "+orderby;
 
             pStmt = createPrepareStatment(sql);
             pStmt.setObject(1, dt_inicio);

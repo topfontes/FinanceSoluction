@@ -98,12 +98,12 @@ public class Plc_plano_contasInsertGWT extends CRUDBaseGWT {
         getCpMaster().add(plc_tx_banco);
         
         
-        LabelField lfplc_tx_tipo = new LabelField("Tipo conta:");
-        lfplc_tx_tipo.setId("lfplc_tx_tipo");
-        getCpMaster().add(lfplc_tx_tipo);
-        cb_tipo_conta.setId("plc_tx_tipo");
-        cb_tipo_conta.setMaxLength(1);
-        getCpMaster().add(cb_tipo_conta);
+//        LabelField lfplc_tx_tipo = new LabelField("Tipo conta:");
+//        lfplc_tx_tipo.setId("lfplc_tx_tipo");
+//        getCpMaster().add(lfplc_tx_tipo);
+//        cb_tipo_conta.setId("plc_tx_tipo");
+//        cb_tipo_conta.setMaxLength(1);
+//        getCpMaster().add(cb_tipo_conta);
 
 //        LabelField lfplc_tx_centro_custo = new LabelField("plc_tx_centro_custo:");
 //        lfplc_tx_centro_custo.setId("lfplc_tx_centro_custo");
@@ -118,23 +118,23 @@ public class Plc_plano_contasInsertGWT extends CRUDBaseGWT {
 //        plc_nr_reduzido.setMaxLength(10);
 //        getCpMaster().add(plc_nr_reduzido);
         povoaContaSuper();
-        povoaTipoConta();
+//        povoaTipoConta();
 
     }
 
-    public void povoaTipoConta() {
-        cb_tipo_conta.setDisplayField("descricao");
-        cb_tipo_conta.setEmptyText("Selecione tipo conta");
-        cb_tipo_conta.setTriggerAction(ComboBox.TriggerAction.ALL);
-        cb_tipo_conta.setMinChars(1);
-        ListStore<Tipo_contaGWT> store = new ListStore<Tipo_contaGWT>();
-        store.add(new Tipo_contaGWT("A", "Ativo"));
-        store.add(new Tipo_contaGWT("R", "Receita"));
-        store.add(new Tipo_contaGWT("D", "Despesas"));
-        store.add(new Tipo_contaGWT("I", "Investimento"));
-        cb_tipo_conta.setStore(store);
-        cb_tipo_conta.getListView().refresh();
-    }
+//    public void povoaTipoConta() {
+//        cb_tipo_conta.setDisplayField("descricao");
+//        cb_tipo_conta.setEmptyText("Selecione tipo conta");
+//        cb_tipo_conta.setTriggerAction(ComboBox.TriggerAction.ALL);
+//        cb_tipo_conta.setMinChars(1);
+//        ListStore<Tipo_contaGWT> store = new ListStore<Tipo_contaGWT>();
+//        store.add(new Tipo_contaGWT("A", "Ativo"));
+//        store.add(new Tipo_contaGWT("R", "Receita"));
+//        store.add(new Tipo_contaGWT("D", "Despesas"));
+//        store.add(new Tipo_contaGWT("I", "Investimento"));
+//        cb_tipo_conta.setStore(store);
+//        cb_tipo_conta.getListView().refresh();
+//    }
 
     public void povoaContaSuper() {
         cb_Conta.setWidth(Constantes.widthField);
@@ -172,7 +172,7 @@ public class Plc_plano_contasInsertGWT extends CRUDBaseGWT {
         plc_plano_contasT.setPlc_nr_nivel(cb_Conta.getValue().getPlc_nr_nivel()+1);
         plc_plano_contasT.setPlc_tx_nome(plc_tx_nome.getValue());
         plc_plano_contasT.setPlc_tx_banco(plc_tx_banco.getValue().booleanValue() == true ?"T":"F");
-        plc_plano_contasT.setPlc_tx_tipo(cb_tipo_conta.getValue().getTipo());
+        plc_plano_contasT.setPlc_tx_tipo(cb_Conta.getValue().getPlc_tx_tipo());
         plc_plano_contasT.setPlc_tx_centro_custo("F");
         plc_plano_contasT.setPlc_nr_reduzido(0);
         plc_plano_contasT.setPlc_tx_status("A");

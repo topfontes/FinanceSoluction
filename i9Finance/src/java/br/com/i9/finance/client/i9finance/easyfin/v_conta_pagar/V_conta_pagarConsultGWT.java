@@ -61,6 +61,7 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
 
     private Grid<V_conta_pagarT> grid = null;
     private List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+    private SummaryColumnConfig<Double> columnDtPag;
 
     public V_conta_pagarConsultGWT() {
         setHeaderVisible(false);
@@ -68,6 +69,7 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
         final NumberFormat currency = NumberFormat.getCurrencyFormat();
         final NumberFormat number = NumberFormat.getFormat("0.00");
         final NumberCellRenderer<Grid<V_conta_pagarT>> numberRenderer = new NumberCellRenderer<Grid<V_conta_pagarT>>(currency);
+
         /*
          GridCellRenderer<Stock> change = new GridCellRenderer<Stock>() {
          public String render(Stock model, String property, ColumnData config, int rowIndex,
@@ -84,7 +86,6 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
          }
          };
          */
-
         SummaryColumnConfig<Integer> columnDoc = new SummaryColumnConfig<Integer>();
         columnDoc.setId("documento");
         columnDoc.setHeader("Documento");
@@ -102,14 +103,14 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
 
         SummaryColumnConfig<Double> columnCli = new SummaryColumnConfig<Double>();
         columnCli.setId("nome");
-        columnCli.setHeader("Cliente");
+        columnCli.setHeader("Fornecedor");
         columnCli.setWidth(200);
         columnCli.setAlignment(HorizontalAlignment.LEFT);
 
         SummaryColumnConfig<Double> columnForma = new SummaryColumnConfig<Double>();
         columnForma.setId("forma");
         columnForma.setHeader("Forma Pag.");
-        columnForma.setWidth(150);
+        columnForma.setWidth(80);
         columnForma.setAlignment(HorizontalAlignment.LEFT);
 
         SummaryColumnConfig<Double> columnParc = new SummaryColumnConfig<Double>();
@@ -118,22 +119,63 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
         columnParc.setWidth(50);
         columnParc.setAlignment(HorizontalAlignment.LEFT);
 
+        SummaryColumnConfig<Double> columnsaldo = new SummaryColumnConfig<Double>();
+        columnsaldo.setId("saldo");
+        columnsaldo.setHeader("Saldo");
+
+        columnsaldo.setRenderer(new GridCellRenderer<V_conta_pagarT>() {
+            @Override
+            public Object render(V_conta_pagarT model, String property, ColumnData config, int rowIndex, int colIndex, ListStore<V_conta_pagarT> store, Grid<V_conta_pagarT> grid) {
+
+                config.style = "background-color: #F1F2F4; text-align: right !important;";
+                NumberFormat format = NumberFormat.getFormat("#,##0.00");
+                return "<span>" + format.format(model.getSaldo()) + "</span>";
+            }
+        });
+
+        columnsaldo.setWidth(90);
+        //columnsaldo.setNumberFormat(number);
+        columnsaldo.setNumberFormat(NumberFormat.getFormat("#,##0.00"));
+        columnsaldo.setSummaryFormat(NumberFormat.getFormat("#,##0.00"));
+        columnsaldo.setAlignment(HorizontalAlignment.RIGHT);
+        columnsaldo.setSummaryType(SummaryType.SUM);
+
+        SummaryColumnConfig<Double> columnVlPago = new SummaryColumnConfig<Double>();
+        columnVlPago.setId("vl_pago");
+        columnVlPago.setHeader("Vl. Pago");
+
+        columnVlPago.setRenderer(new GridCellRenderer<V_conta_pagarT>() {
+            @Override
+            public Object render(V_conta_pagarT model, String property, ColumnData config, int rowIndex, int colIndex, ListStore<V_conta_pagarT> store, Grid<V_conta_pagarT> grid) {
+                config.style = "background-color: #F1F2F4; text-align: right !important;";
+                NumberFormat format = NumberFormat.getFormat("#,##0.00");
+                return "<span>" + format.format(model.getVl_pago()) + "</span>";
+            }
+        });
+
+        columnVlPago.setWidth(90);
+        //columnVlPago.setNumberFormat(number);
+        columnVlPago.setNumberFormat(NumberFormat.getFormat("#,##0.00"));
+        columnVlPago.setSummaryFormat(NumberFormat.getFormat("#,##0.00"));
+        columnVlPago.setAlignment(HorizontalAlignment.RIGHT);
+        columnVlPago.setSummaryType(SummaryType.SUM);
+
         SummaryColumnConfig<Double> columnValor = new SummaryColumnConfig<Double>();
-        columnValor.setId("saldo");
+        columnValor.setId("valor");
         columnValor.setHeader("Valor");
 
         columnValor.setRenderer(new GridCellRenderer<V_conta_pagarT>() {
             @Override
             public Object render(V_conta_pagarT model, String property, ColumnData config, int rowIndex, int colIndex, ListStore<V_conta_pagarT> store, Grid<V_conta_pagarT> grid) {
+                // NumberFormat format = NumberFormat.getFormat("#,##0.00");
+                config.style = "background-color: #F1F2F4; text-align: right !important;";
                 NumberFormat format = NumberFormat.getFormat("#,##0.00");
-                config.style = "background-color: #F1F2F4";
-
-                return "<span style='align:right'>" + format.format(model.getSaldo()) + "</span>";
+                return "<span>" + format.format(model.getValor()) + "</span>";
             }
         });
 
         columnValor.setWidth(90);
-        columnValor.setNumberFormat(number);
+        //columnValor.setNumberFormat(number);
         columnValor.setNumberFormat(NumberFormat.getFormat("#,##0.00"));
         columnValor.setSummaryFormat(NumberFormat.getFormat("#,##0.00"));
         columnValor.setAlignment(HorizontalAlignment.RIGHT);
@@ -142,18 +184,19 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
         SummaryColumnConfig<Double> columnEmissao = new SummaryColumnConfig<Double>();
         columnEmissao.setId("dt_emissao");
         columnEmissao.setHeader("Dt. Emissao");
-        columnEmissao.setWidth(90);
+        columnEmissao.setWidth(80);
         columnEmissao.setAlignment(HorizontalAlignment.LEFT);
         columnEmissao.setDateTimeFormat(dtf);
+        columnEmissao.setHidden(true);
 
         SummaryColumnConfig<Double> columnVen = new SummaryColumnConfig<Double>();
         columnVen.setId("vencimento");
         columnVen.setHeader("Vencimento");
-        columnVen.setWidth(100);
+        columnVen.setWidth(80);
         columnVen.setAlignment(HorizontalAlignment.LEFT);
         columnVen.setDateTimeFormat(dtf);
 
-        SummaryColumnConfig<Double> columnDtPag = new SummaryColumnConfig<Double>();
+        columnDtPag = new SummaryColumnConfig<Double>();
         columnDtPag.setId("dt_pagamento");
         columnDtPag.setHeader("Dt. Pagamento");
         columnDtPag.setWidth(100);
@@ -170,11 +213,14 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
         configs.add(columnCli);
         configs.add(columnForma);
         configs.add(columnParc);
-        configs.add(columnValor);
+
         configs.add(columnEmissao);
         configs.add(columnVen);
         configs.add(columnDtPag);
         configs.add(columnObs);
+        configs.add(columnValor);
+        configs.add(columnVlPago);
+        configs.add(columnsaldo);
 
         SummaryColumnConfig columnbaixa = new SummaryColumnConfig();
         columnbaixa.setId("colBaixa");
@@ -184,7 +230,7 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
         configs.add(columnbaixa);
 
         SummaryColumnConfig columnPag = new SummaryColumnConfig();
-        columnPag.setId("colBaixa");
+        columnPag.setId("colpag");
         columnPag.setWidth(30);
         columnPag.setAlignment(HorizontalAlignment.CENTER);
         columnPag.setRenderer(getPagamentosRender());
@@ -207,24 +253,27 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
 
             public Object render(final V_conta_pagarT model, String property, ColumnData config, final int rowIndex,
                     final int colIndex, ListStore<V_conta_pagarT> store, Grid<V_conta_pagarT> grid) {
+                if (model.getVl_pago() > 0) {
 
-                Button b = new Button();
-                b.addListener(Events.OnClick, new Listener<ButtonEvent>() {
+                    Button b = new Button();
+                    b.addListener(Events.OnClick, new Listener<ButtonEvent>() {
 
-                    public void handleEvent(ButtonEvent be) {
-                        PagamentosTitulosPagarGWT pagamentosTitulosPagarGWT = new PagamentosTitulosPagarGWT();
-                        pagamentosTitulosPagarGWT.setModal(true);
-                        pagamentosTitulosPagarGWT.load(model);
-                        pagamentosTitulosPagarGWT.show();
-                    }
-                });
+                        public void handleEvent(ButtonEvent be) {
+                            PagamentosTitulosPagarGWT pagamentosTitulosPagarGWT = new PagamentosTitulosPagarGWT();
+                            pagamentosTitulosPagarGWT.setModal(true);
+                            pagamentosTitulosPagarGWT.load(model);
+                            pagamentosTitulosPagarGWT.show();
+                        }
+                    });
 
-                b.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 10);
-                b.setToolTip("Pagamentos do Título");
-                b.setIcon(Icones.ICONS.anexar());
-                b.setId("btnpgto");
-
-                return b;
+                    b.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 10);
+                    b.setToolTip("Pagamentos do Título");
+                    b.setIcon(Icones.ICONS.anexar());
+                    b.setId("btnpgto");
+                    return b;
+                } else {
+                    return null;
+                }
             }
         };
     }
@@ -330,7 +379,13 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
                 NumberFormat format = NumberFormat.getFormat("#,##0.00");
 
                 AggregationRowConfig<V_conta_pagarT> aggregation = new AggregationRowConfig<V_conta_pagarT>();
-                aggregation.setHtml("documento", "Total Geral");
+                aggregation.setHtml("documento", "Totais");
+                aggregation.setSummaryType("valor", SummaryType.SUM);
+                aggregation.setSummaryFormat("valor", NumberFormat.getFormat("#,##0.00"));
+
+                aggregation.setSummaryType("vl_pago", SummaryType.SUM);
+                aggregation.setSummaryFormat("vl_pago", NumberFormat.getFormat("#,##0.00"));
+
                 aggregation.setSummaryType("saldo", SummaryType.SUM);
                 aggregation.setSummaryFormat("saldo", NumberFormat.getFormat("#,##0.00"));
 
@@ -361,6 +416,7 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
                 grid.setColumnReordering(true);
                 grid.setId("grid");
                 grid.setLoadMask(true);
+                grid.setAutoExpandColumn("obs");
 
                 grid.setStyleAttribute("borderTop", "none");
                 grid.setBorders(true);
@@ -368,11 +424,11 @@ public class V_conta_pagarConsultGWT extends TituloReceber_PagarGWT {
 
                 cpMain.add(grid);
                 getCpMaster().layout();
-
             }
         };
-
+        columnDtPag.setHidden(radioGroup.getValue() == rPago);
         V_conta_pagarServiceAsync v_conta_pagarAsync = GWT.create(V_conta_pagarService.class);
         v_conta_pagarAsync.getAll(dtInicio.getValue(), dtFim.getValue(), radioGroup.getValue() == rPago ? "T" : "F", callback);
+
     }
 }

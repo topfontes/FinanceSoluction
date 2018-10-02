@@ -30,6 +30,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import br.com.i9.finance.client.i9finance.easyfin.service.*;
+import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 
@@ -50,7 +51,7 @@ public class Cli_clienteInsertGWT extends CRUDBaseGWT {
     protected EasyTextField<String> cli_tx_rg_inscricao = new EasyTextField<String>();
     protected EasyTextField<String> cli_tx_cidade = new EasyTextField<String>();
     protected EasyTextField<String> cli_tx_estado = new EasyTextField<String>();
-    protected EasyTextField<String> cli_tx_cep = new EasyTextField<String>();
+    protected NumberField cli_tx_cep = new NumberField();
     protected EasyTextField<String> cli_tx_cpf_cnpj = new EasyTextField<String>();
     protected EasyTextField<String> cli_tx_email = new EasyTextField<String>();
     protected EasyTextField<String> cli_tx_home_page = new EasyTextField<String>();
@@ -176,7 +177,7 @@ public class Cli_clienteInsertGWT extends CRUDBaseGWT {
         cli_clienteT.setCli_tx_rg_inscricao(cli_tx_rg_inscricao.getValue());
         cli_clienteT.setCli_tx_cidade(cli_tx_cidade.getValue());
         cli_clienteT.setCli_tx_estado(cli_tx_estado.getValue());
-        cli_clienteT.setCli_tx_cep(Integer.parseInt(cli_tx_cep.getValue()));
+        cli_clienteT.setCli_tx_cep(cli_tx_cep.getValue().intValue());
         cli_clienteT.setCli_tx_cpf_cnpj(cli_tx_cpf_cnpj.getValue());
         cli_clienteT.setCli_tx_email(cli_tx_email.getValue());
         cli_clienteT.setCli_tx_home_page(cli_tx_home_page.getValue());
@@ -220,7 +221,7 @@ public class Cli_clienteInsertGWT extends CRUDBaseGWT {
         cli_tx_rg_inscricao.setValue("");
         cli_tx_cidade.setValue("");
         cli_tx_estado.setValue("");
-        cli_tx_cep.setValue("");
+        cli_tx_cep.setValue(null);
         cli_tx_cpf_cnpj.setValue("");
         cli_tx_email.setValue("");
         cli_tx_home_page.setValue("");

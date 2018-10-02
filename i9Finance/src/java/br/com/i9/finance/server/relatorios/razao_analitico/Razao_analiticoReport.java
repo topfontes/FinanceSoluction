@@ -26,6 +26,7 @@ public class Razao_analiticoReport extends RelatorioBase {
     private String periodo;
     double saldoDeb = 0;
     double saldoCred = 0;
+    private String orderby;
 
     @Override
     public void pageLoad() throws Exception {
@@ -37,11 +38,11 @@ public class Razao_analiticoReport extends RelatorioBase {
         try {
             List<V_lancamentosT> list = new ArrayList<V_lancamentosT>();
             if (getStatus().equalsIgnoreCase("T")) {
-                list = systemBase.getV_lancamentosDAO().getAll(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT));
+                list = systemBase.getV_lancamentosDAO().getAll(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT),orderby);
             } else if (getStatus().equalsIgnoreCase("S")) {
-                list = systemBase.getV_lancamentosDAO().getByLan_plc_nr_id_cred(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT));
+                list = systemBase.getV_lancamentosDAO().getByLan_plc_nr_id_cred(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT),orderby);
             } else if (getStatus().equalsIgnoreCase("E")) {
-                list = systemBase.getV_lancamentosDAO().getByLan_plc_nr_id_deb(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT));
+                list = systemBase.getV_lancamentosDAO().getByLan_plc_nr_id_deb(systemBase.convertDateForSql(getDateFormat(getDtInicio())), systemBase.convertDateForSql(getDateFormat(getDtFim())), getPlc_nr_id(), systemBase.getIdLojaUsuarioLogado(usu_usuarioT),orderby);
             }
             systemBase.close();
 
@@ -125,5 +126,19 @@ public class Razao_analiticoReport extends RelatorioBase {
      */
     public void setPlc_nr_id(int plc_nr_id) {
         this.plc_nr_id = plc_nr_id;
+    }
+
+    /**
+     * @return the orderby
+     */
+    public String getOrderby() {
+        return orderby;
+    }
+
+    /**
+     * @param orderby the orderby to set
+     */
+    public void setOrderby(String orderby) {
+        this.orderby = orderby;
     }
 }

@@ -124,7 +124,6 @@ public class Plc_plano_contasDAO extends ObjectDAOCluster {
                 pStmt.close();
             } catch (Exception e) {
             }
-
         }
     }
 

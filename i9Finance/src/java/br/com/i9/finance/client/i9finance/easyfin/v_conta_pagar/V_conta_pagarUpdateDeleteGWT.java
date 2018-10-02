@@ -50,7 +50,7 @@ public class V_conta_pagarUpdateDeleteGWT extends V_conta_pagarInsertGWT {
 	this.v_conta_pagarT = v_conta_pagarT;
 		dt_pagamento.setValue(v_conta_pagarT.getDt_pagamento());
 		valor.setValue(v_conta_pagarT.getValor() + "");
-		id_cli_fab.setValue(v_conta_pagarT.getId_cli_fab() + "");
+//		id_cli_fab.setValue(v_conta_pagarT.getId_cli_fab() + "");
 		nome.setValue(v_conta_pagarT.getNome());
 		fop_nr_id.setValue(v_conta_pagarT.getFop_nr_id() + "");
 		forma.setValue(v_conta_pagarT.getForma());
@@ -72,7 +72,7 @@ public class V_conta_pagarUpdateDeleteGWT extends V_conta_pagarInsertGWT {
     if (valide()) {
   		v_conta_pagarT.setDt_pagamento(dt_pagamento.getValue());
 		v_conta_pagarT.setValor( Double.parseDouble(valor.getValue()));
-		v_conta_pagarT.setId_cli_fab( Integer.parseInt(id_cli_fab.getValue()));
+//		v_conta_pagarT.setId_cli_fab( Integer.parseInt(id_cli_fab.getValue()));
 		v_conta_pagarT.setNome(nome.getValue());
 		v_conta_pagarT.setFop_nr_id( Integer.parseInt(fop_nr_id.getValue()));
 		v_conta_pagarT.setForma(forma.getValue());

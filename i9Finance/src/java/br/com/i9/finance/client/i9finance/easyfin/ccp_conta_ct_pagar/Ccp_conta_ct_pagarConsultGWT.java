@@ -7,7 +7,6 @@ import br.com.i9.finance.client.Constantes;
 import br.com.easynet.gwt.client.EasyContainer;
 import br.com.easynet.gwt.client.component.EasyTextField;
 
-
 import br.com.i9.finance.client.i9finance.easyfin.transfer.*;
 import br.com.easynet.gwt.client.ConsultarBaseGWT;
 import br.com.easynet.gwt.client.CPConsultarBaseGWT;
@@ -51,22 +50,23 @@ import java.util.Date;
 import com.google.gwt.user.client.Timer;
 
 import br.com.i9.finance.client.i9finance.easyfin.service.*;
+
 /**
  *
  * @author geoleite
  */
 public class Ccp_conta_ct_pagarConsultGWT extends CPConsultarBaseGWT {
 
-  private Grid<Ccp_conta_ct_pagarT> grid = null;
-  private List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+    private Grid<Ccp_conta_ct_pagarT> grid = null;
+    private List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
-  public Ccp_conta_ct_pagarConsultGWT() {
-    setHeaderVisible(false);
-    this.setSize("500", "400");
-    final NumberFormat currency = NumberFormat.getCurrencyFormat();
-    final NumberFormat number = NumberFormat.getFormat("0.00");
-    final NumberCellRenderer<Grid<Ccp_conta_ct_pagarT>> numberRenderer = new NumberCellRenderer<Grid<Ccp_conta_ct_pagarT>>(currency);
-    /*
+    public Ccp_conta_ct_pagarConsultGWT() {
+        setHeaderVisible(false);
+        this.setSize("500", "400");
+        final NumberFormat currency = NumberFormat.getCurrencyFormat();
+        final NumberFormat number = NumberFormat.getFormat("0.00");
+        final NumberCellRenderer<Grid<Ccp_conta_ct_pagarT>> numberRenderer = new NumberCellRenderer<Grid<Ccp_conta_ct_pagarT>>(currency);
+        /*
     GridCellRenderer<Stock> change = new GridCellRenderer<Stock>() {
     public String render(Stock model, String property, ColumnData config, int rowIndex,
       int colIndex, ListStore<Stock> store) {
@@ -81,95 +81,95 @@ public class Ccp_conta_ct_pagarConsultGWT extends CPConsultarBaseGWT {
         return numberRenderer.render(null, property, model.get(property));
       }
     };
-    */
-    ColumnConfig column = null;
-    RowNumberer numero = new RowNumberer();
-    column = new ColumnConfig();
-    configs.add(numero);
+         */
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        ColumnConfig column = null;
+        RowNumberer numero = new RowNumberer();
+        column = new ColumnConfig();
+        configs.add(numero);
 
+        column = new ColumnConfig();
+        column.setId("ccp_nr_id");
+        column.setHeader("Ccp_nr_id");
+        column.setWidth(200);
+        column.setAlignment(HorizontalAlignment.LEFT);
+        configs.add(column);
 
-	    column = new ColumnConfig();
-            column.setId("ccp_nr_id");
-            column.setHeader("Ccp_nr_id");
-            column.setWidth(200);
-            column.setAlignment(HorizontalAlignment.LEFT);
-            configs.add(column);
+        column = new ColumnConfig();
+        column.setId("ctp_nr_id");
+        column.setHeader("Ctp_nr_id");
+        column.setWidth(200);
+        column.setAlignment(HorizontalAlignment.LEFT);
+        configs.add(column);
 
-	    column = new ColumnConfig();
-            column.setId("ctp_nr_id");
-            column.setHeader("Ctp_nr_id");
-            column.setWidth(200);
-            column.setAlignment(HorizontalAlignment.LEFT);
-            configs.add(column);
+        column = new ColumnConfig();
+        column.setId("plc_nr_id");
+        column.setHeader("Plc_nr_id");
+        column.setWidth(200);
+        column.setAlignment(HorizontalAlignment.LEFT);
+        configs.add(column);
 
-	    column = new ColumnConfig();
-            column.setId("plc_nr_id");
-            column.setHeader("Plc_nr_id");
-            column.setWidth(200);
-            column.setAlignment(HorizontalAlignment.LEFT);
-            configs.add(column);
+        column = new ColumnConfig();
+        column.setId("ccp_valor");
+        column.setHeader("Ccp_valor");
+        column.setWidth(200);
+        column.setAlignment(HorizontalAlignment.LEFT);
+        configs.add(column);
 
-	    column = new ColumnConfig();
-            column.setId("ccp_valor");
-            column.setHeader("Ccp_valor");
-            column.setWidth(200);
-            column.setAlignment(HorizontalAlignment.LEFT);
-            configs.add(column);
+        column = new ColumnConfig();
+        column.setId("colEditar");
+        column.setWidth(30);
+        column.setAlignment(HorizontalAlignment.CENTER);
+        column.setRenderer(getEditarRender());
+        configs.add(column);
 
+        load();
+    }
 
+    public void btnAtualizarAction(ButtonEvent be) {
+        super.btnAtualizarAction(be);
+    }
 
-    column = new ColumnConfig();
-    column.setId("colEditar");
-    column.setWidth(30);
-    column.setAlignment(HorizontalAlignment.CENTER);
-    column.setRenderer(getEditarRender());
-    configs.add(column);
+    public void btnNovoAction(ButtonEvent be) {
+        Ccp_conta_ct_pagarInsertGWT ccp_conta_ct_pagarInsertGWT = new Ccp_conta_ct_pagarInsertGWT();
+        ccp_conta_ct_pagarInsertGWT.setCcp_conta_ct_pagarConsult(this);
+        ccp_conta_ct_pagarInsertGWT.setModal(true);
+        ccp_conta_ct_pagarInsertGWT.show();
+    }
 
-    load();
-  }
+    private GridCellRenderer<Ccp_conta_ct_pagarT> getEditarRender() {
+        return new GridCellRenderer<Ccp_conta_ct_pagarT>() {
 
-  public void btnAtualizarAction(ButtonEvent be){
-    super.btnAtualizarAction(be);
-  }
+            public Object render(final Ccp_conta_ct_pagarT model, String property, ColumnData config, final int rowIndex,
+                    final int colIndex, ListStore<Ccp_conta_ct_pagarT> store, Grid<Ccp_conta_ct_pagarT> grid) {
 
-  public void btnNovoAction(ButtonEvent be) {
-    Ccp_conta_ct_pagarInsertGWT ccp_conta_ct_pagarInsertGWT = new Ccp_conta_ct_pagarInsertGWT();
-    ccp_conta_ct_pagarInsertGWT.setCcp_conta_ct_pagarConsult(this);
-    ccp_conta_ct_pagarInsertGWT.setModal(true);
-    ccp_conta_ct_pagarInsertGWT.show();
-  }
-  private GridCellRenderer<Ccp_conta_ct_pagarT> getEditarRender() {
-    return new GridCellRenderer<Ccp_conta_ct_pagarT>() {
+                Button b = new Button();
+                b.addListener(Events.OnClick, new Listener<ButtonEvent>() {
 
-      public Object render(final Ccp_conta_ct_pagarT model, String property, ColumnData config, final int rowIndex,
-        final int colIndex, ListStore<Ccp_conta_ct_pagarT> store, Grid<Ccp_conta_ct_pagarT> grid) {
+                    public void handleEvent(ButtonEvent be) {
+                        Ccp_conta_ct_pagarUpdateDeleteGWT ccp_conta_ct_pagarUpdateDeleteGWT = new Ccp_conta_ct_pagarUpdateDeleteGWT();
+                        ccp_conta_ct_pagarUpdateDeleteGWT.setCcp_conta_ct_pagarConsult(Ccp_conta_ct_pagarConsultGWT.this);
+                        ccp_conta_ct_pagarUpdateDeleteGWT.load(model);
+                        ccp_conta_ct_pagarUpdateDeleteGWT.setVisible(true);
+                    }
+                });
 
-        Button b = new Button();
-        b.addListener(Events.OnClick, new Listener<ButtonEvent>() {
+                b.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 10);
+                b.setToolTip("Alterar dados.");
+                b.setIcon(ICONS.edit());
+                b.setId("btnEditar");
 
-        public void handleEvent(ButtonEvent be) {
-          Ccp_conta_ct_pagarUpdateDeleteGWT ccp_conta_ct_pagarUpdateDeleteGWT = new Ccp_conta_ct_pagarUpdateDeleteGWT();
-          ccp_conta_ct_pagarUpdateDeleteGWT.setCcp_conta_ct_pagarConsult(Ccp_conta_ct_pagarConsultGWT.this);
-          ccp_conta_ct_pagarUpdateDeleteGWT.load(model);
-          ccp_conta_ct_pagarUpdateDeleteGWT.setVisible(true);
-        }
-      });
+                return b;
+            }
+        };
+    }
 
-      b.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 10);
-      b.setToolTip("Alterar dados.");
-      b.setIcon(ICONS.edit());
-      b.setId("btnEditar");
-
-      return b;
-      }
-    };
-  }
-
-  /**
-   * Opcão para exportar dados
-   * @param formato
-   */
-  public void export(String formato ) {
+    /**
+     * Opcão para exportar dados
+     *
+     * @param formato
+     */
+    public void export(String formato) {
         //FORMAT_CSV
         //FORMAT_PDF
         //FORMAT_TXT
@@ -182,52 +182,50 @@ public class Ccp_conta_ct_pagarConsultGWT extends CPConsultarBaseGWT {
         } else {
           url += "?op=imprimir&tipo=TXT&download=true";
         }
-*/
-  }
+         */
+    }
 
+    public void load() {
+        AsyncCallback<List<Ccp_conta_ct_pagarT>> callback = new AsyncCallback<List<Ccp_conta_ct_pagarT>>() {
+            public void onFailure(Throwable caught) {
+                MessageBox.alert("ATENÇÃO", caught.getMessage(), null);
+            }
 
-  public void load() {
-    AsyncCallback<List<Ccp_conta_ct_pagarT>> callback = new AsyncCallback<List<Ccp_conta_ct_pagarT>>() {
+            public void onSuccess(List<Ccp_conta_ct_pagarT> result) {
+                if (grid != null) {
+                    grid.removeFromParent();
+                }
+                ListStore<Ccp_conta_ct_pagarT> list = new ListStore<Ccp_conta_ct_pagarT>();
+                list.add(result);
 
-      public void onFailure(Throwable caught) {
-      	MessageBox.alert("ATENÇÃO", caught.getMessage(), null);
-      }
+                ColumnModel cm = new ColumnModel(configs);
 
-      public void onSuccess(List<Ccp_conta_ct_pagarT> result) {
-          if (grid !=  null) {
-            grid.removeFromParent();
-          }
-	  ListStore<Ccp_conta_ct_pagarT> list = new ListStore<Ccp_conta_ct_pagarT>();
-  	  list.add(result);
+                PagingModelMemoryProxy proxy = new PagingModelMemoryProxy(list.getModels());
+                PagingLoader<PagingLoadResult<Ccp_conta_ct_pagarT>> loader = new BasePagingLoader<PagingLoadResult<Ccp_conta_ct_pagarT>>(proxy);
+                loader.setRemoteSort(true);
 
-          ColumnModel cm = new ColumnModel(configs);
+                ListStore<Ccp_conta_ct_pagarT> store = new ListStore<Ccp_conta_ct_pagarT>(loader);
+                store.add(list.getModels());
 
-          PagingModelMemoryProxy proxy = new PagingModelMemoryProxy(list.getModels());
-          PagingLoader<PagingLoadResult<Ccp_conta_ct_pagarT>> loader = new BasePagingLoader<PagingLoadResult<Ccp_conta_ct_pagarT>>(proxy);
-          loader.setRemoteSort(true);
+                getToolBarPage().setPageSize(20);
+                getToolBarPage().bind(loader);
+                loader.load(0, 20);
 
-          ListStore<Ccp_conta_ct_pagarT> store = new ListStore<Ccp_conta_ct_pagarT>(loader);
-          store.add(list.getModels());
+                grid = new Grid<Ccp_conta_ct_pagarT>(store, cm);
+                grid.setColumnReordering(true);
+                grid.setId("grid");
+                grid.setLoadMask(true);
 
-          getToolBarPage().setPageSize(20);
-          getToolBarPage().bind(loader);
-          loader.load(0, 20);
+                grid.setStyleAttribute("borderTop", "none");
+                grid.setBorders(true);
+                grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-          grid = new Grid<Ccp_conta_ct_pagarT>(store, cm);
-	  grid.setColumnReordering(true);
-	  grid.setId("grid");
-          grid.setLoadMask(true);
+                getCpMaster().add(grid);
+                getCpMaster().layout();
+            }
+        };
 
-          grid.setStyleAttribute("borderTop", "none");
-          grid.setBorders(true);
-          grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-          getCpMaster().add(grid);
-          getCpMaster().layout();
-      }
-    };
-    
-    Ccp_conta_ct_pagarServiceAsync ccp_conta_ct_pagarAsync = GWT.create(Ccp_conta_ct_pagarService.class);
-    ccp_conta_ct_pagarAsync.getAll(callback);
-  }
+        Ccp_conta_ct_pagarServiceAsync ccp_conta_ct_pagarAsync = GWT.create(Ccp_conta_ct_pagarService.class);
+        ccp_conta_ct_pagarAsync.getAll(callback);
+    }
 }

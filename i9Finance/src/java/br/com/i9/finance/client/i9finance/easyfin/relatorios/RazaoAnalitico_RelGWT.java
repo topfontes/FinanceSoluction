@@ -13,6 +13,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
+import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.Date;
@@ -29,6 +30,9 @@ public class RazaoAnalitico_RelGWT extends RelatorioBaseGWTFinance {
     private Radio rTodos = new Radio();
     private Radio rEntradas = new Radio();
     private Radio rSaidas = new Radio();
+    private RadioGroup radioOrdem = new RadioGroup();
+    private Radio rcrescente = new Radio();
+    private Radio rdecrescentes = new Radio();
     
     public RazaoAnalitico_RelGWT() {
         
@@ -38,6 +42,7 @@ public class RazaoAnalitico_RelGWT extends RelatorioBaseGWTFinance {
         addPeriodo();
         getToolBarMaster().add(cb_Conta);
         addOpcoes();
+        addOrdem();
         addBtnFiltrar();
         addBtnExportar();
         povoaConta();
@@ -74,6 +79,8 @@ public class RazaoAnalitico_RelGWT extends RelatorioBaseGWTFinance {
         url.append(cb_Conta.getValue().getPlc_nr_id());
         url.append("&status=");
         url.append(radioGroup.getValue() == rTodos ? "T" : radioGroup.getValue() == rEntradas ? "E" : "S");
+        url.append("&orderby=");
+        url.append(radioOrdem.getValue()==rcrescente?"ASC":"DESC");
         url.append("&").append(getUsuarioLogadoREL());
         return url.toString();
     }
@@ -92,8 +99,18 @@ public class RazaoAnalitico_RelGWT extends RelatorioBaseGWTFinance {
         radioGroup.setValue(rTodos);
         getToolBarMaster().add(radioGroup);
     }
-    
+    public void addOrdem() {
+        rcrescente.setBoxLabel("Crescente");
+        rdecrescentes.setBoxLabel("Decrescente");
+        rSaidas.setBoxLabel("Saidas");
+        radioOrdem.add(rcrescente);
+        radioOrdem.add(rdecrescentes);
+        getToolBarMaster().add(new SeparatorToolItem());
+        getToolBarMaster().add(radioOrdem);
+        radioOrdem.setValue(rcrescente);
+    }
     public void povoaConta() {
+        cb_Conta.setWidth(250);
         cb_Conta.setWidth(Constantes.widthField);
         cb_Conta.setDisplayField("plc_tx_nome");
         cb_Conta.setEmptyText("Selecione a super conta");

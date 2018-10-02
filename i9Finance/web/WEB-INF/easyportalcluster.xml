@@ -3,8 +3,7 @@
   <connection>
     <name>easyportalds1</name>
     <type_database>PostgreSql</type_database>
-    <!--datasource_name>java:comp/env/jdbc/easyportalds1</datasource_name-->
-    <datasource_name>jdbc/i9financeds1</datasource_name>
+     <datasource_name>jdbc/i9financeds1</datasource_name>
 <!--
     <type_database>PostgreSql</type_database>
     <type_database>ORACLE</type_database>

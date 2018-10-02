@@ -47,4 +47,5 @@ public class Ctp_conta_pagarServiceImpl extends RemoteServiceServlet implements 
         Ctp_conta_pagarBL ctp_conta_pagarBL = new Ctp_conta_pagarBL();
         ctp_conta_pagarBL.updateBaixa(ctp_conta_pagarT, conta_credora,getUsuarioLogado());
     }
+
 }

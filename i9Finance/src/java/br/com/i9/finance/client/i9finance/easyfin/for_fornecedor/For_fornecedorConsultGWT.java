@@ -118,7 +118,7 @@ public class For_fornecedorConsultGWT extends CPConsultarBaseGWT {
 
         column = new ColumnConfig();
         column.setId("for_tx_status");
-        column.setHeader("For_tx_status");
+        column.setHeader("Status");
         column.setWidth(200);
         column.setRenderer(new GridCellRenderer<For_fornecedorT>() {
 

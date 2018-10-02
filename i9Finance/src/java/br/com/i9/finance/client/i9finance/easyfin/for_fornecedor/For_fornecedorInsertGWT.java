@@ -4,32 +4,22 @@
  */
 package br.com.i9.finance.client.i9finance.easyfin.for_fornecedor;
 
-import br.com.i9.finance.client.Constantes;
-import br.com.easynet.gwt.client.EasyAccessURL;
-import br.com.easynet.gwt.client.EasyContainer;
-import br.com.easynet.gwt.client.IListenetResponse;
 import br.com.easynet.gwt.client.component.EasyTextField;
 
 import br.com.i9.finance.client.i9finance.easyfin.transfer.*;
 import br.com.easynet.gwt.client.CRUDBaseGWT;
 
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONValue;
-import com.google.gwt.user.client.ui.Widget;
-import java.util.HashMap;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
-import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.Info;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import br.com.i9.finance.client.i9finance.easyfin.service.*;
+import com.extjs.gxt.ui.client.widget.form.NumberField;
 
 /**
  *
@@ -48,7 +38,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
     protected EasyTextField<String> for_tx_cpf_cnpj = new EasyTextField<String>();
     protected EasyTextField<String> for_tx_email = new EasyTextField<String>();
     protected EasyTextField<String> for_tx_rg_inscricao = new EasyTextField<String>();
-    protected EasyTextField<String> for_tx_cep = new EasyTextField<String>();
+    protected NumberField for_tx_cep = new NumberField();
     protected EasyTextField<String> for_tx_cidade = new EasyTextField<String>();
     protected EasyTextField<String> for_tx_estado = new EasyTextField<String>();
     protected EasyTextField<String> for_tx_bairro = new EasyTextField<String>();
@@ -66,13 +56,14 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         tl.setCellPadding(4);
         getCpMaster().setLayout(tl);
 
-        LabelField lffor_tx_nome = new LabelField("for_tx_nome:");
+        LabelField lffor_tx_nome = new LabelField("Nome:");
         lffor_tx_nome.setId("lffor_tx_nome");
         getCpMaster().add(lffor_tx_nome);
         for_tx_nome.setId("for_tx_nome");
         for_tx_nome.setMaxLength(100);
         getCpMaster().add(for_tx_nome);
-        for_tx_nome.setWidth(widthField);
+        for_tx_nome.setWidth(300);
+        
         
         LabelField lffor_tx_cpf_cnpj = new LabelField("CPF:");
         lffor_tx_cpf_cnpj.setId("lffor_tx_cpf_cnpj");
@@ -94,7 +85,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_endereco.setId("for_tx_endereco");
         for_tx_endereco.setMaxLength(100);
         getCpMaster().add(for_tx_endereco);
-        for_tx_endereco.setWidth(widthField);
+        for_tx_endereco.setWidth(400);
 
         LabelField lffor_tx_cep = new LabelField("CEP:");
         lffor_tx_cep.setId("lffor_tx_cep");
@@ -109,7 +100,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_bairro.setId("for_tx_bairro");
         for_tx_bairro.setMaxLength(100);
         getCpMaster().add(for_tx_bairro);  
-        for_tx_bairro.setWidth(widthField);
+        for_tx_bairro.setWidth(300);
 
         LabelField lffor_tx_cidade = new LabelField("Cidade:");
         lffor_tx_cidade.setId("lffor_tx_cidade");
@@ -117,13 +108,14 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_cidade.setId("for_tx_cidade");
         for_tx_cidade.setMaxLength(50);
         getCpMaster().add(for_tx_cidade);
-        for_tx_cidade.setWidth(widthField);
+        for_tx_cidade.setWidth(300);
 
         LabelField lffor_tx_estado = new LabelField("Estado:");
         lffor_tx_estado.setId("lffor_tx_estado");
         getCpMaster().add(lffor_tx_estado);
         for_tx_estado.setId("for_tx_estado");
         for_tx_estado.setMaxLength(2);
+        for_tx_estado.setWidth(300);
         getCpMaster().add(for_tx_estado);
         
         LabelField lffor_tx_contato = new LabelField("Contato:");
@@ -132,7 +124,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_contato.setId("for_tx_contato");
         for_tx_contato.setMaxLength(100);
         getCpMaster().add(for_tx_contato);   
-        for_tx_contato.setWidth(widthField);
+        for_tx_contato.setWidth(300);
 
         LabelField lffor_tx_home_page = new LabelField("Home Page:");
         lffor_tx_home_page.setId("lffor_tx_home_page");
@@ -140,7 +132,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_home_page.setId("for_tx_home_page");
         for_tx_home_page.setMaxLength(200);
         getCpMaster().add(for_tx_home_page);
-        for_tx_home_page.setWidth(widthField);
+        for_tx_home_page.setWidth(300);
 
 
         LabelField lffor_tx_email = new LabelField("E-mail:");
@@ -149,7 +141,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_email.setId("for_tx_email");
         for_tx_email.setMaxLength(200);
         getCpMaster().add(for_tx_email);    
-        for_tx_email.setWidth(widthField);
+        for_tx_email.setWidth(300);
     }
 
     public boolean valide() {
@@ -165,7 +157,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
             for_fornecedorT.setFor_tx_cpf_cnpj(for_tx_cpf_cnpj.getValue());
             for_fornecedorT.setFor_tx_email(for_tx_email.getValue());
             for_fornecedorT.setFor_tx_rg_inscricao(for_tx_rg_inscricao.getValue());
-            for_fornecedorT.setFor_tx_cep(Integer.parseInt(for_tx_cep.getValue()));
+            for_fornecedorT.setFor_tx_cep(for_tx_cep.getValue().intValue());
             for_fornecedorT.setFor_tx_cidade(for_tx_cidade.getValue());
             for_fornecedorT.setFor_tx_estado(for_tx_estado.getValue());
             for_fornecedorT.setFor_tx_bairro(for_tx_bairro.getValue());
@@ -203,7 +195,7 @@ public class For_fornecedorInsertGWT extends CRUDBaseGWT {
         for_tx_cpf_cnpj.setValue("");
         for_tx_email.setValue("");
         for_tx_rg_inscricao.setValue("");
-        for_tx_cep.setValue("");
+        for_tx_cep.setValue(null);
         for_tx_cidade.setValue("");
         for_tx_estado.setValue("");
         for_tx_bairro.setValue("");

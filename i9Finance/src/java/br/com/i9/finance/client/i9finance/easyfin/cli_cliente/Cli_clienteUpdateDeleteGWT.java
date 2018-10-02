@@ -56,7 +56,7 @@ public class Cli_clienteUpdateDeleteGWT extends Cli_clienteInsertGWT {
         cli_tx_rg_inscricao.setValue(cli_clienteT.getCli_tx_rg_inscricao());
         cli_tx_cidade.setValue(cli_clienteT.getCli_tx_cidade());
         cli_tx_estado.setValue(cli_clienteT.getCli_tx_estado());
-        cli_tx_cep.setValue(cli_clienteT.getCli_tx_cep() + "");
+        cli_tx_cep.setValue(cli_clienteT.getCli_tx_cep());
         cli_tx_cpf_cnpj.setValue(cli_clienteT.getCli_tx_cpf_cnpj());
         cli_tx_email.setValue(cli_clienteT.getCli_tx_email());
         cli_tx_home_page.setValue(cli_clienteT.getCli_tx_home_page());

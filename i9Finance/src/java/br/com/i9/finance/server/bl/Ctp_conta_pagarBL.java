@@ -8,6 +8,7 @@ import br.com.easynet.bl.BusinessException;
 import br.com.i9.finance.client.util.Funcoes;
 import br.com.jdragon.dao.cluster.DAOFactoryCluster;
 import br.com.easynet.easyportal.transfer.Usu_usuarioT;
+
 /**
  * Classe Criada Automaticamente pelo "EasyNet Generate JDragon"
  */
@@ -113,14 +114,30 @@ public class Ctp_conta_pagarBL extends SystemBusinessBase {
      * Realiza uma alterac�o na tabela
      */
     public boolean update(Ctp_conta_pagarT ctp_conta_pagarT) throws Exception {
+        DAOFactoryCluster cluster = null;
         try {
             if (!valide("update")) {
                 throw new BusinessException("Tentativa de execucao indevida da operacao".concat("update"));
             }
             if (exist(ctp_conta_pagarT)) {
                 Ctp_conta_pagarDAO ctp_conta_pagarDAO = getCtp_conta_pagarDAO();
+                cluster = ctp_conta_pagarDAO.getdAOFactoryCluster();
                 ctp_conta_pagarDAO.update(ctp_conta_pagarT);
+
+                List<Ccp_conta_ct_pagarT> list = getCcp_conta_ct_pagarDAO().getByCtp_conta_pagar(ctp_conta_pagarT);
+                if (list.size() == 0) {
+                    if (ctp_conta_pagarT.getList() != null) {
+                        getCcp_conta_ct_pagarDAO().delete(ctp_conta_pagarT);
+                        for (Ccp_conta_ct_pagarT ccp_conta_ct_pagarT : ctp_conta_pagarT.getList()) {
+                            ccp_conta_ct_pagarT.setCcp_nr_id(getIncCcp_conta_ct_pagar());
+                            ccp_conta_ct_pagarT.setCtp_nr_id(ctp_conta_pagarT.getCtp_nr_id());
+                            getCcp_conta_ct_pagarDAO().insert(ccp_conta_ct_pagarT);
+                        }
+                    }
+                }
+                cluster.commitTransaction();
                 return true;
+
             } else {
                 return false;
             }
@@ -160,16 +177,17 @@ public class Ctp_conta_pagarBL extends SystemBusinessBase {
                     percentualPago = 100 - ((Valor_parcela - ctp_conta_pagarT.getCtp_vl_pago()) * 100) / Valor_parcela;
                 }
 
-                ctp_conta_pagarDAO.updateBaixa(ctp_conta_pagarT);
+                setBaixa(ctp_conta_pagarDAO, ctp_conta_pagarT);
 
                 List<Ccp_conta_ct_pagarT> list = getCcp_conta_ct_pagarDAO().getByCtp_conta_pagar(ctp_conta_pagarT);
                 Lan_lancamentoT lan_lancamentoT = new Lan_lancamentoT();
-                lan_lancamentoT.setLan_nr_id(getIncLan_lancamento());
+
                 lan_lancamentoT.setCtp_nr_id(ctp_conta_pagarT.getCtp_nr_id());
                 lan_lancamentoT.setLan_dt_lancamento(ctp_conta_pagarT.getCtp_dt_pagamento());
                 lan_lancamentoT.setLoj_nr_id(getIdLojaUsuarioLogado(usu_usuarioT));
                 lan_lancamentoT.setLan_plc_nr_id_cred(conta_credora);
                 for (Ccp_conta_ct_pagarT ccpT : list) {
+                    lan_lancamentoT.setLan_nr_id(getIncLan_lancamento());
                     lan_lancamentoT.setLan_valor(ccpT.getCcp_valor() * percentualPago / 100);
                     lan_lancamentoT.setLan_plc_nr_id_deb(ccpT.getPlc_nr_id());
                     getLan_lancamentoDAO().insert(lan_lancamentoT);
@@ -188,6 +206,11 @@ public class Ctp_conta_pagarBL extends SystemBusinessBase {
         } finally {
             close();
         }
+    }
+
+    public void setBaixa(Ctp_conta_pagarDAO ctp_conta_pagarDAO, Ctp_conta_pagarT ctp_conta_pagarT) throws Exception {
+
+        ctp_conta_pagarDAO.updateBaixa(ctp_conta_pagarT);
     }
 
     /**

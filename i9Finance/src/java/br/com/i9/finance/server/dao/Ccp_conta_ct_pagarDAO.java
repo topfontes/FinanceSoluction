@@ -72,6 +72,24 @@ public class Ccp_conta_ct_pagarDAO extends ObjectDAOCluster {
 
         }
     }
+    
+    public void delete(Ctp_conta_pagarT ctp_conta_pagarT) throws Exception {
+        PreparedStatement pStmt = null;
+        try {
+            String sql = "delete from easyfin.ccp_conta_ct_pagar where  ctp_nr_id=?";
+            pStmt = createPrepareStatment(sql);
+            pStmt.setObject(1, ctp_conta_pagarT.getCtp_nr_id());
+            pStmt.execute();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                pStmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+    }
 
     private List<Ccp_conta_ct_pagarT> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Ccp_conta_ct_pagarT> objs = new Vector();
